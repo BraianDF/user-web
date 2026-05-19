@@ -138,188 +138,208 @@ export default function Profile() {
         <>
             <div className="container py-5 d-flex justify-content-center">
 
-            <div className="col-12 col-md-10 col-lg-8 col-xl-6">
+                <div className="col-12 col-md-10 col-lg-8 col-xl-6">
 
-                <div className="card shadow border-0 rounded-4">
+                    <div className="card shadow border-0 rounded-4">
 
-                    <div className="card-body p-4">
+                        <div className="card-body p-4">
 
-                        <div className="d-flex justify-content-between align-items-center mb-4">
-                            
-                            <h2 className="fw-bold mb-0">
-                                Meu Perfil
-                            </h2>
+                            <div className="d-flex justify-content-between align-items-center mb-4">
 
-                            <span className={`badge ${user?.status ? "bg-success" : "bg-danger"} fs-6`}>
-                                {user?.status ? "Ativo" : "Inativo"}
-                            </span>
+                                <h2 className="fw-bold mb-0">
+                                    Meu Perfil
+                                </h2>
 
-                        </div>
+                                <span className={`badge ${user?.status ? "bg-success" : "bg-danger"} fs-6`}>
+                                    {user?.status ? "Ativo" : "Inativo"}
+                                </span>
 
-                        {/* Email */}
-                        <div className="border rounded-3 p-3 mb-3">
+                            </div>
 
-                            <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+                            {/* Email */}
+                            <div className="border rounded-3 p-3 mb-3">
 
-                                <div className="w-100 me-3">
+                                <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
-                                    <small className="text-secondary d-block">
-                                        Email
-                                    </small>
+                                    <div className="w-100">
+
+                                        <small className="text-secondary d-block">
+                                            Email
+                                        </small>
+
+                                        {!editingEmail ? (
+                                            <strong className="text-break">
+                                                {user?.email}
+                                            </strong>
+                                        ) : (
+                                            <input
+                                                type="email"
+                                                className="form-control mt-2"
+                                                value={newEmail}
+                                                onChange={(e) => setNewEmail(e.target.value)}
+                                            />
+                                        )}
+
+                                    </div>
 
                                     {!editingEmail ? (
-                                        <strong className="text-break">{user?.email}</strong>
+                                        <button
+                                            className="btn btn-outline-primary btn-sm"
+                                            onClick={() => {
+                                                setNewEmail(user?.email || "");
+                                                setEditingEmail(true);
+                                            }}
+                                        >
+                                            <i className="bi bi-pencil-square me-2"></i>
+                                            Editar
+                                        </button>
                                     ) : (
-                                        <input
-                                            type="email"
-                                            className="form-control mt-2"
-                                            value={newEmail}
-                                            onChange={(e) => setNewEmail(e.target.value)}
-                                        />
+                                        <div className="d-flex flex-column flex-sm-row gap-2">
+
+                                            <button
+                                                className="btn btn-success btn-sm"
+                                                onClick={handleUpdateEmail}
+                                            >
+                                                Salvar
+                                            </button>
+
+                                            <button
+                                                className="btn btn-secondary btn-sm"
+                                                onClick={() => setEditingEmail(false)}
+                                            >
+                                                Cancelar
+                                            </button>
+
+                                        </div>
                                     )}
 
                                 </div>
 
-                                {!editingEmail ? (
-                                    <button
-                                        className="btn btn-outline-primary btn-sm"
-                                        onClick={() => {
-                                            setNewEmail(user?.email || "");
-                                            setEditingEmail(true);
-                                        }}
-                                    >
-                                        <i className="bi bi-pencil-square me-2"></i>
-                                        Editar
-                                    </button>
-                                ) : (
-                                    <div className="d-flex gap-2">
-
-                                        <button
-                                            className="btn btn-success btn-sm"
-                                            onClick={handleUpdateEmail}
-                                        >
-                                            Salvar
-                                        </button>
-
-                                        <button
-                                            className="btn btn-secondary btn-sm"
-                                            onClick={() => setEditingEmail(false)}
-                                        >
-                                            Cancelar
-                                        </button>
-
-                                    </div>
-                                )}
-
                             </div>
 
-                        </div>
+                            {/* Senha */}
+                            <div className="border rounded-3 p-3 mb-3">
 
-                        {/* Senha */}
-                        <div className="border rounded-3 p-3 mb-3">
+                                <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
-                            <small className="text-secondary d-block">
-                                Senha
-                            </small>
+                                    <div className="w-100">
 
-                            {!editingPassword ? (
-                                <div className="d-flex justify-content-between align-items-center">
+                                        <small className="text-secondary d-block">
+                                            Senha
+                                        </small>
 
-                                    <strong>************</strong>
+                                        {!editingPassword ? (
+                                            <strong>
+                                                ************
+                                            </strong>
+                                        ) : (
+                                            <div className="mt-2">
 
-                                    <button
-                                        className="btn btn-outline-warning btn-sm"
-                                        onClick={() => setEditingPassword(true)}
-                                    >
-                                        <i className="bi bi-key me-2"></i>
-                                        Atualizar Senha
-                                    </button>
+                                                <input
+                                                    type="password"
+                                                    className="form-control mb-2"
+                                                    placeholder="Senha atual"
+                                                    value={passwordData.senhaAtual}
+                                                    onChange={(e) =>
+                                                        setPasswordData({
+                                                            ...passwordData,
+                                                            senhaAtual: e.target.value
+                                                        })
+                                                    }
+                                                />
 
-                                </div>
-                            ) : (
-                                <div>
+                                                <input
+                                                    type="password"
+                                                    className="form-control"
+                                                    placeholder="Nova senha"
+                                                    value={passwordData.senhaNova}
+                                                    onChange={(e) =>
+                                                        setPasswordData({
+                                                            ...passwordData,
+                                                            senhaNova: e.target.value
+                                                        })
+                                                    }
+                                                />
 
-                                    <input
-                                        type="password"
-                                        className="form-control mb-2"
-                                        placeholder="Senha atual"
-                                        value={passwordData.senhaAtual}
-                                        onChange={(e) =>
-                                            setPasswordData({
-                                                ...passwordData,
-                                                senhaAtual: e.target.value
-                                            })
-                                        }
-                                    />
-
-                                    <input
-                                        type="password"
-                                        className="form-control mb-3"
-                                        placeholder="Nova senha"
-                                        value={passwordData.senhaNova}
-                                        onChange={(e) =>
-                                            setPasswordData({
-                                                ...passwordData,
-                                                senhaNova: e.target.value
-                                            })
-                                        }
-                                    />
-
-                                    <div className="d-flex gap-2">
-
-                                        <button
-                                            className="btn btn-success btn-sm"
-                                            onClick={handleUpdatePassword}
-                                        >
-                                            Salvar
-                                        </button>
-
-                                        <button
-                                            className="btn btn-secondary btn-sm"
-                                            onClick={() => setEditingPassword(false)}
-                                        >
-                                            Cancelar
-                                        </button>
+                                            </div>
+                                        )}
 
                                     </div>
 
+                                    {!editingPassword ? (
+                                        <button
+                                            className="btn btn-outline-warning btn-sm"
+                                            onClick={() => setEditingPassword(true)}
+                                        >
+                                            <i className="bi bi-key me-2"></i>
+                                            Atualizar Senha
+                                        </button>
+                                    ) : (
+                                        <div className="d-flex flex-column flex-sm-row gap-2">
+
+                                            <button
+                                                className="btn btn-success btn-sm"
+                                                onClick={handleUpdatePassword}
+                                            >
+                                                Salvar
+                                            </button>
+
+                                            <button
+                                                className="btn btn-secondary btn-sm"
+                                                onClick={() => setEditingPassword(false)}
+                                            >
+                                                Cancelar
+                                            </button>
+
+                                        </div>
+                                    )}
+
                                 </div>
-                            )}
-
-                        </div>
-
-                        {/* Roles */}
-                        <div className="border rounded-3 p-3">
-
-                            <small className="text-secondary d-block mb-1">
-                                Roles
-                            </small>
-
-                            <div className="d-flex flex-wrap gap-2">
-
-                                {user?.roles?.map((role, index) => (
-                                    <span
-                                        key={index}
-                                        className="badge bg-dark-subtle text-dark border"
-                                    >
-                                        {role}
-                                    </span>
-                                ))}
 
                             </div>
 
-                        </div>
+                            {/* Roles */}
+                            <div className="border rounded-3 p-3 mb-3">
 
-                        {/* Cancelar Conta */}
-                        <div className="text-center p-3">
+                                <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
-                            <button
-                                className="btn btn-outline-danger px-4"
-                                onClick={handleDisableAccount}
-                            >
-                                <i className="bi bi-trash3 me-2"></i>
-                                Cancelar Conta
-                            </button>
+                                    <div className="w-100">
+
+                                        <small className="text-secondary d-block mb-2">
+                                            Roles
+                                        </small>
+
+                                        <div className="d-flex flex-wrap gap-2">
+
+                                            {user?.roles?.map((role, index) => (
+                                                <span
+                                                    key={index}
+                                                    className="badge bg-dark-subtle text-dark border"
+                                                >
+                                                    {role}
+                                                </span>
+                                            ))}
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            {/* Cancelar Conta */}
+                            <div className="text-center pt-2">
+
+                                <button
+                                    className="btn btn-outline-danger px-4"
+                                    onClick={handleDisableAccount}
+                                >
+                                    <i className="bi bi-trash3 me-2"></i>
+                                    Cancelar Conta
+                                </button>
+
+                            </div>
 
                         </div>
 
@@ -329,15 +349,17 @@ export default function Profile() {
 
             </div>
 
-            </div>
-
             <ErrorModal
                 show={showModal}
                 message={errorMessage}
                 onClose={() => setShowModal(false)}
             />
 
-            <SuccessModal show={showSuccess} message={successMessage} onClose={() => setShowSuccess(false)}/>
+            <SuccessModal
+                show={showSuccess}
+                message={successMessage}
+                onClose={() => setShowSuccess(false)}
+            />
         </>
     );
 }

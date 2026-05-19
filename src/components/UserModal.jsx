@@ -195,326 +195,337 @@ export default function UserModal({ userId, show, onClose, onError }) {
 
     return (
         <>
-        <div
-            className="modal fade show d-block"
-            tabIndex="-1"
-            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-        >
+            <div
+                className="modal fade show d-block"
+                tabIndex="-1"
+                style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+            >
+                <div className="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable px-2">
 
-            <div className="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable px-2">
+                    <div className="modal-content border-0 rounded-4 w-100">
 
-                <div className="modal-content border-0 rounded-4 w-100">
+                        <div className="modal-header border-0 pb-0">
 
-                    <div className="modal-header border-0 pb-0">
+                            <h4 className="modal-title fw-bold">
+                                Perfil do Usuário
+                            </h4>
 
-                        <h4 className="modal-title fw-bold">
-                            Perfil do Usuário
-                        </h4>
+                            <button
+                                className="btn-close"
+                                onClick={onClose}
+                            />
 
-                        <button
-                            className="btn-close"
-                            onClick={onClose}
-                        />
+                        </div>
 
-                    </div>
+                        <div className="modal-body p-4">
 
-                    <div className="modal-body p-4">
+                            {loading ? (
+                                <p>Carregando...</p>
+                            ) : user && (
+                                <>
 
-                        {loading ? (
-                            <p>Carregando...</p>
-                        ) : user && (
-                            <>
+                                    {/* Email */}
+                                    <div className="border rounded-3 p-3 mb-3">
 
-                                {/* Email */}
-                                <div className="border rounded-3 p-3 mb-3">
+                                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
-                                    <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+                                            <div className="w-100">
 
-                                        <div className="w-100 me-3">
+                                                <small className="text-secondary d-block">
+                                                    Email
+                                                </small>
 
-                                            <small className="text-secondary d-block">
-                                                Email
-                                            </small>
+                                                {!editingEmail ? (
+                                                    <strong className="text-break">
+                                                        {user.email}
+                                                    </strong>
+                                                ) : (
+                                                    <input
+                                                        type="email"
+                                                        className="form-control mt-2"
+                                                        value={newEmail}
+                                                        onChange={(e) => setNewEmail(e.target.value)}
+                                                    />
+                                                )}
+
+                                            </div>
 
                                             {!editingEmail ? (
-                                                <strong className="text-break">{user.email}</strong>
+                                                <button
+                                                    className="btn btn-outline-primary btn-sm"
+                                                    onClick={() => {
+                                                        setNewEmail(user.email);
+                                                        setEditingEmail(true);
+                                                    }}
+                                                >
+                                                    <i className="bi bi-pencil-square me-2"></i>
+                                                    Editar
+                                                </button>
                                             ) : (
-                                                <input
-                                                    type="email"
-                                                    className="form-control mt-2"
-                                                    value={newEmail}
-                                                    onChange={(e) => setNewEmail(e.target.value)}
-                                                />
+                                                <div className="d-flex flex-column flex-sm-row gap-2">
+
+                                                    <button
+                                                        className="btn btn-success btn-sm"
+                                                        onClick={handleUpdateEmail}
+                                                    >
+                                                        Salvar
+                                                    </button>
+
+                                                    <button
+                                                        className="btn btn-secondary btn-sm"
+                                                        onClick={() => setEditingEmail(false)}
+                                                    >
+                                                        Cancelar
+                                                    </button>
+
+                                                </div>
                                             )}
 
                                         </div>
 
-                                        {!editingEmail ? (
-                                            <button
-                                                className="btn btn-outline-primary btn-sm"
-                                                onClick={() => {
-                                                    setNewEmail(user.email);
-                                                    setEditingEmail(true);
-                                                }}
-                                            >
-                                                <i className="bi bi-pencil-square me-2"></i>
-                                                Editar
-                                            </button>
-                                        ) : (
-                                            <div className="d-flex gap-2">
+                                    </div>
 
-                                                <button
-                                                    className="btn btn-success btn-sm"
-                                                    onClick={handleUpdateEmail}
-                                                >
-                                                    Salvar
-                                                </button>
+                                    {/* Senha */}
+                                    <div className="border rounded-3 p-3 mb-3">
 
-                                                <button
-                                                    className="btn btn-secondary btn-sm"
-                                                    onClick={() => setEditingEmail(false)}
-                                                >
-                                                    Cancelar
-                                                </button>
+                                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+
+                                            <div className="w-100">
+
+                                                <small className="text-secondary d-block">
+                                                    Senha
+                                                </small>
+
+                                                {!editingPassword ? (
+                                                    <strong>
+                                                        ************
+                                                    </strong>
+                                                ) : (
+                                                    <input
+                                                        type="password"
+                                                        className="form-control mt-2"
+                                                        placeholder="Nova senha"
+                                                        value={newPassword}
+                                                        onChange={(e) => setNewPassword(e.target.value)}
+                                                    />
+                                                )}
 
                                             </div>
-                                        )}
+
+                                            {!editingPassword ? (
+                                                <button
+                                                    className="btn btn-outline-warning btn-sm"
+                                                    onClick={() => setEditingPassword(true)}
+                                                >
+                                                    <i className="bi bi-key me-2"></i>
+                                                    Atualizar Senha
+                                                </button>
+                                            ) : (
+                                                <div className="d-flex flex-column flex-sm-row gap-2">
+
+                                                    <button
+                                                        className="btn btn-success btn-sm"
+                                                        onClick={handleUpdatePassword}
+                                                    >
+                                                        Salvar
+                                                    </button>
+
+                                                    <button
+                                                        className="btn btn-secondary btn-sm"
+                                                        onClick={() => setEditingPassword(false)}
+                                                    >
+                                                        Cancelar
+                                                    </button>
+
+                                                </div>
+                                            )}
+
+                                        </div>
 
                                     </div>
 
-                                </div>
+                                    {/* Status */}
+                                    <div className="border rounded-3 p-3 mb-3">
 
-                                {/* Senha */}
-                                <div className="border rounded-3 p-3 mb-3">
-
-                                    <small className="text-secondary d-block">
-                                        Senha
-                                    </small>
-
-                                    {!editingPassword ? (
                                         <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
-                                            <strong>************</strong>
+                                            <div className="w-100">
 
-                                            <button
-                                                className="btn btn-outline-warning btn-sm"
-                                                onClick={() => setEditingPassword(true)}
-                                            >
-                                                <i className="bi bi-key me-2"></i>
-                                                Atualizar Senha
-                                            </button>
+                                                <small className="text-secondary d-block">
+                                                    Status
+                                                </small>
 
-                                        </div>
-                                    ) : (
-                                        <div>
+                                                {!editingStatus ? (
+                                                    <span
+                                                        className={`badge ${user.status ? "bg-success" : "bg-danger"}`}
+                                                    >
+                                                        {user.status ? "Ativo" : "Inativo"}
+                                                    </span>
+                                                ) : (
+                                                    <select
+                                                        className="form-select mt-2"
+                                                        value={newStatus}
+                                                        onChange={(e) =>
+                                                            setNewStatus(e.target.value === "true")
+                                                        }
+                                                    >
+                                                        <option value="true">
+                                                            Ativo
+                                                        </option>
 
-                                            <input
-                                                type="password"
-                                                className="form-control mb-3"
-                                                placeholder="Nova senha"
-                                                value={newPassword}
-                                                onChange={(e) => setNewPassword(e.target.value)}
-                                            />
+                                                        <option value="false">
+                                                            Inativo
+                                                        </option>
 
-                                            <div className="d-flex gap-2">
-
-                                                <button
-                                                    className="btn btn-success btn-sm"
-                                                    onClick={handleUpdatePassword}
-                                                >
-                                                    Salvar
-                                                </button>
-
-                                                <button
-                                                    className="btn btn-secondary btn-sm"
-                                                    onClick={() => setEditingPassword(false)}
-                                                >
-                                                    Cancelar
-                                                </button>
+                                                    </select>
+                                                )}
 
                                             </div>
-
-                                        </div>
-                                    )}
-
-                                </div>
-
-                                {/* Status */}
-                                <div className="border rounded-3 p-3 mb-3">
-
-                                    <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
-
-                                        <div>
-
-                                            <small className="text-secondary d-block">
-                                                Status
-                                            </small>
 
                                             {!editingStatus ? (
-                                                <span className={`badge ${user.status ? "bg-success" : "bg-danger"}`}>
-                                                    {user.status ? "Ativo" : "Inativo"}
-                                                </span>
-                                            ) : (
-                                                <select
-                                                    className="form-select mt-2"
-                                                    value={newStatus}
-                                                    onChange={(e) =>
-                                                        setNewStatus(e.target.value === "true")
-                                                    }
+                                                <button
+                                                    className="btn btn-outline-primary btn-sm"
+                                                    onClick={() => {
+                                                        setNewStatus(user.status);
+                                                        setEditingStatus(true);
+                                                    }}
                                                 >
-                                                    <option value="true">
-                                                        Ativo
-                                                    </option>
+                                                    <i className="bi bi-pencil-square me-2"></i>
+                                                    Editar
+                                                </button>
+                                            ) : (
+                                                <div className="d-flex flex-column flex-sm-row gap-2">
 
-                                                    <option value="false">
-                                                        Inativo
-                                                    </option>
+                                                    <button
+                                                        className="btn btn-success btn-sm"
+                                                        onClick={handleUpdateStatus}
+                                                    >
+                                                        Salvar
+                                                    </button>
 
-                                                </select>
+                                                    <button
+                                                        className="btn btn-secondary btn-sm"
+                                                        onClick={() => setEditingStatus(false)}
+                                                    >
+                                                        Cancelar
+                                                    </button>
+
+                                                </div>
                                             )}
 
                                         </div>
 
-                                        {!editingStatus ? (
-                                            <button
-                                                className="btn btn-outline-primary btn-sm"
-                                                onClick={() => {
-                                                    setNewStatus(user.status);
-                                                    setEditingStatus(true);
-                                                }}
-                                            >
-                                                <i className="bi bi-pencil-square me-2"></i>
-                                                Editar
-                                            </button>
-                                        ) : (
-                                            <div className="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
+                                    </div>
 
-                                                <button
-                                                    className="btn btn-success btn-sm"
-                                                    onClick={handleUpdateStatus}
-                                                >
-                                                    Salvar
-                                                </button>
+                                    {/* Roles */}
+                                    <div className="border rounded-3 p-3 mb-3">
 
-                                                <button
-                                                    className="btn btn-secondary btn-sm"
-                                                    onClick={() => setEditingStatus(false)}
-                                                >
-                                                    Cancelar
-                                                </button>
+                                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+
+                                            <div className="w-100">
+
+                                                <small className="text-secondary d-block mb-2">
+                                                    Roles
+                                                </small>
+
+                                                {!editingRoles ? (
+                                                    <div className="d-flex flex-wrap gap-2">
+
+                                                        {user.roles?.map((role, i) => (
+                                                            <span
+                                                                key={i}
+                                                                className="badge bg-dark-subtle text-dark border"
+                                                            >
+                                                                {role}
+                                                            </span>
+                                                        ))}
+
+                                                    </div>
+                                                ) : (
+                                                    <div className="d-flex flex-wrap gap-3 mt-2">
+
+                                                        {availableRoles.map((role) => (
+
+                                                            <div
+                                                                className="form-check"
+                                                                key={role}
+                                                            >
+
+                                                                <input
+                                                                    className="form-check-input"
+                                                                    type="checkbox"
+                                                                    checked={selectedRoles.includes(role)}
+                                                                    onChange={() => handleRoleChange(role)}
+                                                                    id={role}
+                                                                />
+
+                                                                <label
+                                                                    className="form-check-label"
+                                                                    htmlFor={role}
+                                                                >
+                                                                    {role}
+                                                                </label>
+
+                                                            </div>
+                                                        ))}
+
+                                                    </div>
+                                                )}
 
                                             </div>
-                                        )}
+
+                                            {!editingRoles ? (
+                                                <button
+                                                    className="btn btn-outline-primary btn-sm"
+                                                    onClick={() => {
+                                                        setSelectedRoles(user.roles || []);
+                                                        setEditingRoles(true);
+                                                    }}
+                                                >
+                                                    <i className="bi bi-pencil-square me-2"></i>
+                                                    Editar
+                                                </button>
+                                            ) : (
+                                                <div className="d-flex flex-column flex-sm-row gap-2">
+
+                                                    <button
+                                                        className="btn btn-success btn-sm"
+                                                        onClick={handleUpdateRoles}
+                                                    >
+                                                        Salvar
+                                                    </button>
+
+                                                    <button
+                                                        className="btn btn-secondary btn-sm"
+                                                        onClick={() => setEditingRoles(false)}
+                                                    >
+                                                        Cancelar
+                                                    </button>
+
+                                                </div>
+                                            )}
+
+                                        </div>
 
                                     </div>
 
-                                </div>
+                                    {/* Excluir Conta */}
+                                    <div className="text-center p-3">
 
-                                {/* Roles */}
-                                <div className="border rounded-3 p-3 mb-3">
+                                        <button
+                                            className="btn btn-outline-danger px-4"
+                                            onClick={handleDeleteUser}
+                                        >
+                                            <i className="bi bi-trash3 me-2"></i>
+                                            Excluir Conta
+                                        </button>
 
-                                    <small className="text-secondary d-block mb-2">
-                                        Roles
-                                    </small>
+                                    </div>
 
-                                    {!editingRoles ? (
-                                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+                                </>
+                            )}
 
-                                            <div className="d-flex gap-2 flex-wrap">
-
-                                                {user.roles?.map((role, i) => (
-                                                    <span
-                                                        key={i}
-                                                        className="badge bg-dark-subtle text-dark border"
-                                                    >
-                                                        {role}
-                                                    </span>
-                                                ))}
-
-                                            </div>
-
-                                            <button
-                                                className="btn btn-outline-primary btn-sm"
-                                                onClick={() => {
-                                                    setSelectedRoles(user.roles || []);
-                                                    setEditingRoles(true);
-                                                }}
-                                            >
-                                                <i className="bi bi-pencil-square me-2"></i>
-                                                Editar
-                                            </button>
-
-                                        </div>
-                                    ) : (
-                                        <div>
-
-                                            <div className="d-flex flex-wrap gap-3 mb-3">
-
-                                                {availableRoles.map((role) => (
-
-                                                    <div
-                                                        className="form-check"
-                                                        key={role}
-                                                    >
-
-                                                        <input
-                                                            className="form-check-input"
-                                                            type="checkbox"
-                                                            checked={selectedRoles.includes(role)}
-                                                            onChange={() => handleRoleChange(role)}
-                                                            id={role}
-                                                        />
-
-                                                        <label
-                                                            className="form-check-label"
-                                                            htmlFor={role}
-                                                        >
-                                                            {role}
-                                                        </label>
-
-                                                    </div>
-                                                ))}
-
-                                            </div>
-
-                                            <div className="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
-
-                                                <button
-                                                    className="btn btn-success btn-sm"
-                                                    onClick={handleUpdateRoles}
-                                                >
-                                                    Salvar
-                                                </button>
-
-                                                <button
-                                                    className="btn btn-secondary btn-sm"
-                                                    onClick={() => setEditingRoles(false)}
-                                                >
-                                                    Cancelar
-                                                </button>
-
-                                            </div>
-
-                                        </div>
-                                    )}
-
-                                </div>
-
-                                {/* Excluir Conta */}
-                                <div className="text-center p-3">
-
-                                    <button
-                                        className="btn btn-outline-danger px-4"
-                                        onClick={handleDeleteUser}
-                                    >
-                                        <i className="bi bi-trash3 me-2"></i>
-                                        Excluir Conta
-                                    </button>
-
-                                </div>
-
-                            </>
-                        )}
+                        </div>
 
                     </div>
 
@@ -522,8 +533,11 @@ export default function UserModal({ userId, show, onClose, onError }) {
 
             </div>
 
-        </div>
-        <SuccessModal show={showSuccess} message={successMessage} onClose={() => setShowSuccess(false)}/>
+            <SuccessModal
+                show={showSuccess}
+                message={successMessage}
+                onClose={() => setShowSuccess(false)}
+            />
         </>
     );
 }

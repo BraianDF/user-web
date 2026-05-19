@@ -44,39 +44,85 @@ export default function RegisterForm({ setIsLogin }) {
     return (
 
         <>
-        <div className="modal-body p-5 pt-0">
-                    
-            <form onSubmit={handleSubmit}>
-                <div className="form-floating mb-3">
-                    <input type="email" className="form-control rounded-3" placeholder="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <label>Email</label>
-                </div>
+            <div className="modal-body p-3 p-md-5 pt-0">
 
-                <div className="input-group mb-3">
+                <form onSubmit={handleSubmit}>
 
-                    <div className="form-floating">
-                        <input type={mostrarSenha ? "text" : "password"} className="form-control rounded-3" placeholder="senha" required value={senha} onChange={(e) => setSenha(e.target.value)} />
-                        <label>Senha</label>
+                    <div className="form-floating mb-3">
+                        <input
+                            type="email"
+                            className="form-control rounded-3"
+                            placeholder="email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <label>Email</label>
                     </div>
 
-                    <button type="button" className="btn btn-outline-secondary" onClick={() => setMostrarSenha(!mostrarSenha)}>
-                        <i className={`bi ${mostrarSenha ? "bi-eye-slash" : "bi-eye"}`}></i>
+                    <div className="input-group mb-3">
+
+                        <div className="form-floating flex-grow-1">
+                            <input
+                                type={mostrarSenha ? "text" : "password"}
+                                className="form-control rounded-start-3"
+                                placeholder="senha"
+                                required
+                                value={senha}
+                                onChange={(e) => setSenha(e.target.value)}
+                            />
+                            <label>Senha</label>
+                        </div>
+
+                        <button
+                            type="button"
+                            className="btn btn-outline-secondary"
+                            onClick={() => setMostrarSenha(!mostrarSenha)}
+                        >
+                            <i className={`bi ${mostrarSenha ? "bi-eye-slash" : "bi-eye"}`}></i>
+                        </button>
+
+                    </div>
+
+                    <button
+                        className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
+                        type="submit"
+                    >
+                        Criar Conta
                     </button>
 
-                </div>
+                    <hr className="my-4" />
 
-                <button className="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Criar Conta</button>
+                    <h2 className="fs-6 fs-md-5 fw-bold mb-3 text-center text-md-start">
+                        Já possui uma conta?
+                    </h2>
 
-                <hr className="my-4" /> 
-                <h2 className="fs-5 fw-bold mb-3">Já possuí uma conta?</h2> 
-                <button type="button" onClick={() => setIsLogin(true)} className="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3">Fazer Login</button>
+                    <button
+                        type="button"
+                        onClick={() => setIsLogin(true)}
+                        className="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3"
+                    >
+                        Fazer Login
+                    </button>
 
-            </form>
+                </form>
 
-        </div>
+            </div>
 
-        <ErrorModal show={showModal} message={errorMessage} onClose={() => setShowModal(false)}/>
-        <SuccessModal show={showSuccess} message={successMessage} onClose={() => {setShowSuccess(false);setIsLogin(true);}}/>
+            <ErrorModal
+                show={showModal}
+                message={errorMessage}
+                onClose={() => setShowModal(false)}
+            />
+
+            <SuccessModal
+                show={showSuccess}
+                message={successMessage}
+                onClose={() => {
+                    setShowSuccess(false);
+                    setIsLogin(true);
+                }}
+            />
         </>
     );
 }
