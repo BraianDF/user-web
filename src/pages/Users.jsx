@@ -91,8 +91,10 @@ export default function Users() {
     return (
         <>
         <div className="container py-5 d-flex justify-content-center">
+        
+        <div className="col-12 col-md-10 col-lg-8 col-xl-6">
 
-            <div className="card shadow border-0 rounded-4 w-50">
+            <div className="card shadow border-0 rounded-4">
 
                 <div className="card-body p-4">
 
@@ -286,6 +288,8 @@ export default function Users() {
                 </div>
 
             </div>
+
+        </div>
 
         </div>
 

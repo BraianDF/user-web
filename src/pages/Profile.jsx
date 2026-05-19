@@ -138,7 +138,9 @@ export default function Profile() {
         <>
             <div className="container py-5 d-flex justify-content-center">
 
-                <div className="card shadow border-0 rounded-4 w-50">
+            <div className="col-12 col-md-10 col-lg-8 col-xl-6">
+
+                <div className="card shadow border-0 rounded-4">
 
                     <div className="card-body p-4">
 
@@ -324,6 +326,8 @@ export default function Profile() {
                     </div>
 
                 </div>
+
+            </div>
 
             </div>
 
