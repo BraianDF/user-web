@@ -201,11 +201,9 @@ export default function UserModal({ userId, show, onClose, onError }) {
             style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
         >
 
-            <div className="modal-dialog modal-dialog-centered modal-lg justify-content-center">
+            <div className="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable px-2">
 
-            <div className="col-12 col-md-10 col-lg-8 col-xl-6">
-
-                <div className="modal-content border-0 rounded-4">
+                <div className="modal-content border-0 rounded-4 w-100">
 
                     <div className="modal-header border-0 pb-0">
 
@@ -230,7 +228,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
                                 {/* Email */}
                                 <div className="border rounded-3 p-3 mb-3">
 
-                                    <div className="d-flex justify-content-between align-items-center">
+                                    <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
                                         <div className="w-100 me-3">
 
@@ -239,7 +237,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
                                             </small>
 
                                             {!editingEmail ? (
-                                                <strong>{user.email}</strong>
+                                                <strong className="text-break">{user.email}</strong>
                                             ) : (
                                                 <input
                                                     type="email"
@@ -294,7 +292,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
                                     </small>
 
                                     {!editingPassword ? (
-                                        <div className="d-flex justify-content-between align-items-center">
+                                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
                                             <strong>************</strong>
 
@@ -344,7 +342,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
                                 {/* Status */}
                                 <div className="border rounded-3 p-3 mb-3">
 
-                                    <div className="d-flex justify-content-between align-items-center">
+                                    <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
                                         <div>
 
@@ -389,7 +387,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
                                                 Editar
                                             </button>
                                         ) : (
-                                            <div className="d-flex gap-2">
+                                            <div className="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
 
                                                 <button
                                                     className="btn btn-success btn-sm"
@@ -420,7 +418,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
                                     </small>
 
                                     {!editingRoles ? (
-                                        <div className="d-flex justify-content-between align-items-center">
+                                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
                                             <div className="d-flex gap-2 flex-wrap">
 
@@ -479,7 +477,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
 
                                             </div>
 
-                                            <div className="d-flex gap-2">
+                                            <div className="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
 
                                                 <button
                                                     className="btn btn-success btn-sm"
@@ -521,8 +519,6 @@ export default function UserModal({ userId, show, onClose, onError }) {
                     </div>
 
                 </div>
-
-            </div>
 
             </div>
 

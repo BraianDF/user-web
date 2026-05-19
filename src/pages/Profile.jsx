@@ -159,7 +159,7 @@ export default function Profile() {
                         {/* Email */}
                         <div className="border rounded-3 p-3 mb-3">
 
-                            <div className="d-flex justify-content-between align-items-center">
+                            <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
 
                                 <div className="w-100 me-3">
 
@@ -168,7 +168,7 @@ export default function Profile() {
                                     </small>
 
                                     {!editingEmail ? (
-                                        <strong>{user?.email}</strong>
+                                        <strong className="text-break">{user?.email}</strong>
                                     ) : (
                                         <input
                                             type="email"
