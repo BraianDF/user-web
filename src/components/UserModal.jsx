@@ -203,7 +203,9 @@ export default function UserModal({ userId, show, onClose, onError }) {
 
             <div className="modal-dialog modal-dialog-centered modal-lg justify-content-center">
 
-                <div className="modal-content border-0 rounded-4 w-75">
+            <div className="col-12 col-md-10 col-lg-8 col-xl-6">
+
+                <div className="modal-content border-0 rounded-4">
 
                     <div className="modal-header border-0 pb-0">
 
@@ -519,6 +521,8 @@ export default function UserModal({ userId, show, onClose, onError }) {
                     </div>
 
                 </div>
+
+            </div>
 
             </div>
 
