@@ -3,11 +3,14 @@ import api from "../api/axios";
 
 import ErrorModal from "../components/ErrorModal";
 import UserModal from "../components/UserModal";
+import CreateUserModal from "../components/CreateUserModal";
 
 export default function Users() {
 
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [showModal, setShowModal] = useState(false);
+
+    const [showCreateModal, setShowCreateModal] = useState(false);
 
     const [showModalError, setShowModalError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -133,6 +136,15 @@ export default function Users() {
                             </button>
 
                         </form>
+
+                        {/* Criar usuário */}
+                        <button
+                            className="btn btn-success"
+                            onClick={() => setShowCreateModal(true)}
+                        >
+                            <i className="bi bi-plus-circle me-2"></i>
+                            Novo Usuário
+                        </button>
 
                         </div>
 
@@ -294,6 +306,8 @@ export default function Users() {
         </div>
 
         <UserModal userId={selectedUserId} show={showModal} onClose={handleCloseModal} onError={handleError} />
+
+        <CreateUserModal show={showCreateModal} onClose={() => setShowCreateModal(false)} onSuccess={loadUsers} onError={handleError} />
 
         <ErrorModal show={showModalError} message={errorMessage} onClose={() => setShowModalError(false)}/>
         </>

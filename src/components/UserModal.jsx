@@ -16,6 +16,8 @@ export default function UserModal({ userId, show, onClose, onError }) {
     const [editingStatus, setEditingStatus] = useState(false);
     const [editingRoles, setEditingRoles] = useState(false);
 
+    const [closeAfterSuccess, setCloseAfterSuccess] = useState(false);
+
     // Formulários
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -69,6 +71,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
 
             setSuccessMessage("Email atualizado com sucesso!");
             setShowSuccess(true);
+            setCloseAfterSuccess(false);
 
             await loadUser();
 
@@ -95,6 +98,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
 
             setSuccessMessage("Senha atualizada com sucesso!");
             setShowSuccess(true);
+            setCloseAfterSuccess(false);
 
         } catch (error) {
 
@@ -117,6 +121,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
 
             setSuccessMessage("Status atualizado com sucesso!");
             setShowSuccess(true);
+            setCloseAfterSuccess(false);
 
             await loadUser();
 
@@ -141,6 +146,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
 
             setSuccessMessage("Roles atualizadas com sucesso!");
             setShowSuccess(true);
+            setCloseAfterSuccess(false);
 
             await loadUser();
 
@@ -161,8 +167,7 @@ export default function UserModal({ userId, show, onClose, onError }) {
 
             setSuccessMessage("Usuário excluído com sucesso!");
             setShowSuccess(true);
-
-            onClose();
+            setCloseAfterSuccess(true);
 
         } catch (error) {
 
@@ -536,7 +541,13 @@ export default function UserModal({ userId, show, onClose, onError }) {
             <SuccessModal
                 show={showSuccess}
                 message={successMessage}
-                onClose={() => setShowSuccess(false)}
+                onClose={() => {
+                    setShowSuccess(false);
+                    if (closeAfterSuccess) {
+                        onClose();
+                        setCloseAfterSuccess(false);
+                    }
+                }}
             />
         </>
     );
