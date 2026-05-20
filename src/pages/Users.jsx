@@ -18,7 +18,7 @@ export default function Users() {
     const [page, setPage] = useState({});
     const [searchEmail, setSearchEmail] = useState("");
 
-    const [pageSize, setPageSize] = useState(10);
+    const [pageSize, setPageSize] = useState(5);
     const [sortField, setSortField] = useState("email");
     const [direction, setDirection] = useState("ASC");
 
