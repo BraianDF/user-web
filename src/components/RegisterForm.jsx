@@ -7,6 +7,8 @@ import SuccessModal from "./SuccessModal";
 
 export default function RegisterForm({ setIsLogin }) {
 
+    const [loading, setLoading] = useState(false);
+
     const { register } = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
@@ -25,6 +27,10 @@ export default function RegisterForm({ setIsLogin }) {
 
         event.preventDefault();
 
+        if (loading) return; // segurança extra contra duplo clique
+
+        setLoading(true);
+
         try {
 
             await register(email, senha);
@@ -38,6 +44,8 @@ export default function RegisterForm({ setIsLogin }) {
 
             setErrorMessage(error.response?.data?.message || "Erro ao cadastrar.");
             setShowModal(true);
+        } finally {
+            setLoading(false); // sempre libera no final (sucesso ou erro)
         }
     }
 
@@ -87,8 +95,16 @@ export default function RegisterForm({ setIsLogin }) {
                     <button
                         className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
                         type="submit"
+                        disabled={loading}
                     >
-                        Criar Conta
+                        {loading ? (
+                            <>
+                                <span
+                                    className="spinner-border spinner-border-sm me-2"
+                                />
+                                Criando conta...
+                            </>
+                            ): "Criar Conta"}
                     </button>
 
                     <hr className="my-4" />

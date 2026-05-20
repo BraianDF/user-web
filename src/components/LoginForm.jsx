@@ -7,6 +7,8 @@ import { AuthContext } from "../context/AuthContext";
 import ErrorModal from "./ErrorModal";
 
 export default function LoginForm({ setIsLogin }) {
+
+    const [loading, setLoading] = useState(false);
     
     const { login } = useContext(AuthContext);
 
@@ -25,6 +27,10 @@ export default function LoginForm({ setIsLogin }) {
 
         event.preventDefault();
 
+        if (loading) return; // segurança extra contra duplo clique
+
+        setLoading(true);
+
         try {
 
             await login(email, senha);
@@ -41,6 +47,8 @@ export default function LoginForm({ setIsLogin }) {
             setShowModal(true);
 
             //alert(error.response?.data?.message || "Erro ao logar.");
+        } finally {
+            setLoading(false); // sempre libera no final (sucesso ou erro)
         }
     }
 
@@ -89,8 +97,16 @@ export default function LoginForm({ setIsLogin }) {
                     <button
                         className="w-100 mb-2 btn btn-lg rounded-3 btn-primary"
                         type="submit"
+                        disabled={loading}
                     >
-                        Entrar
+                        {loading ? (
+                            <>
+                                <span
+                                    className="spinner-border spinner-border-sm me-2"
+                                />
+                                Entrando...
+                            </>
+                            ) : "Entrar"}
                     </button>
 
                     <hr className="my-4" />
