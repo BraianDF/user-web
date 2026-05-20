@@ -2,13 +2,25 @@ export default function Home() {
 
     return (
 
-        <main>
+        <main className="flex-grow-1 d-flex align-items-center">
 
-            <div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center"> 
-                <div className="col-md-6 p-lg-5 mx-auto my-5"> 
-                    <h1 className="display-3 fw-bold">Sistema de Usuários</h1> 
-                    <h3 className="fw-normal text-muted mb-3">Projeto React + Spring Boot + PostgreSQL</h3> 
-                </div> 
+            <div className="container">
+
+                <div className="row justify-content-center text-center">
+
+                    <div className="col-12 col-md-10 col-lg-8">
+
+                        <h1 className="display-4 fw-bold mb-3">
+                            Sistema de Usuários
+                        </h1>
+
+                        <p className="lead text-secondary">
+                            Projeto desenvolvido com React, Spring Boot e PostgreSQL
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
